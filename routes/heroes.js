@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const HeroesModel = require('../models/HeroesModel');
 
-router.get('/all', async(req, res) => {
+router.get('/', async(req, res) => {
     const response = await HeroesModel.getAllHeroes();
     if (response !== undefined) {
         res.json(response).status(200);
@@ -14,7 +14,7 @@ router.get('/all', async(req, res) => {
 
 router.get('/hero/:hero_name', async(req, res) => {
     const {hero_name} = req.params;
-    const response = await HeroesModel.getAllByHeroName(hero_name);
+    const response = await HeroesModel.getHeroByHeroName(hero_name);
     if (response !== undefined) {
         res.json(response[0]).status(200);
     } else {
@@ -24,7 +24,7 @@ router.get('/hero/:hero_name', async(req, res) => {
 
 router.get('/hero/id/:hero_id', async(req, res) => {
     const {hero_id} = req.params;
-    const response = await HeroesModel.getAllByHeroId(hero_id);
+    const response = await HeroesModel.getHeroByHeroId(hero_id);
     res.json(response[0]).status(200);
 });
 
