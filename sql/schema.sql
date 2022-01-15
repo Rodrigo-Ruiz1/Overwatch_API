@@ -1,17 +1,14 @@
 CREATE TABLE roles (
     id serial PRIMARY KEY,
     role text,
-    role_description text,
-    characters text
+    role_description text
 );
 
 CREATE TABLE heroes (
     id serial PRIMARY KEY,
     hero_name text,
-    role_id int REFERENCES roles(id)
-    -- affiliation int REFERENCES affiliations(id),
-    -- weapon_id int REFERENCES weapons(id),
-    -- abilities int REFERENCES abilities(id)
+    role_id int REFERENCES roles(id),
+    hero_bio text
 );
 
 CREATE TABLE affiliations (
@@ -21,7 +18,6 @@ CREATE TABLE affiliations (
 );
 
 CREATE TABLE heroes_affiliations (
-    id serial PRIMARY KEY,
     hero_id int REFERENCES heroes(id),
     affiliation_id int REFERENCES affiliations(id)
 );
@@ -35,7 +31,6 @@ CREATE TABLE weapons (
 );
 
 CREATE TABLE heroes_weapons (
-    id serial PRIMARY KEY,
     hero_id int REFERENCES heroes(id),
     weapon_id int REFERENCEs weapons(id)
 );
