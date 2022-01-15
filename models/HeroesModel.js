@@ -20,7 +20,7 @@ class HeroesModel {
 
     static async getHeroByHeroName(hero_name) {
         try {
-            const query = `SELECT heroes.id, heroes.hero_name, roles.role, 
+            const query = `SELECT heroes.id, heroes.hero_name, heroes.hero_bio, roles.role, 
             json_agg(DISTINCT jsonb_build_object('affiliation', json_build_object('name', affiliations.affiliation, 'description', affiliations.affiliation_description))) as affiliations, 
             json_agg(DISTINCT jsonb_build_object('weapon', jsonb_build_object('name', weapons.weapon_name, 'description', weapons.weapon_description))) as weapons, 
             json_agg(DISTINCT jsonb_build_object('ability', jsonb_build_object('name', abilities.ability_name, 'type', abilities.ability_type, 'description', abilities.ability_description, 'cooldown', abilities.cooldown, 'duration', abilities.duration, 'effect', abilities.effect, 'damage', abilities.damage))) as abilities 
@@ -64,6 +64,7 @@ class HeroesModel {
         }
     }
 
+    //change response to only return id, name, bio?
     static async getHeroesByRole(role) {
         try {
             const query = `SELECT heroes.id, heroes.hero_name, roles.role, 
