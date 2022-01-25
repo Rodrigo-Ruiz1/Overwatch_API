@@ -32,7 +32,7 @@ router.get('/role/:role', async(req, res) => {
     const {role} = req.params;
     const response = await HeroesModel.getHeroesByRole(role);
     if (response.length > 0) {
-        res.json(response).status(200)
+        res.json(response[0]).status(200)
     } else {
         res.status(404).json({error : 'No Results Found'});
     }
