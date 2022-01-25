@@ -67,19 +67,7 @@ class HeroesModel {
     //change response to only return id, name, bio?
     static async getHeroesByRole(role) {
         try {
-            const query = `SELECT heroes.id, heroes.hero_name, roles.role, 
-            json_agg(DISTINCT jsonb_build_object('affiliation', json_build_object('name', affiliations.affiliation, 'description', affiliations.affiliation_description))) as affiliations, 
-            json_agg(DISTINCT jsonb_build_object('weapon', jsonb_build_object('name', weapons.weapon_name, 'description', weapons.weapon_description))) as weapons, json_agg(DISTINCT jsonb_build_object('ability', jsonb_build_object('name', abilities.ability_name, 'type', abilities.ability_type, 'description', abilities.ability_description, 'cooldown', abilities.cooldown, 'duration', abilities.duration, 'effect', abilities.effect, 'damage', abilities.damage))) as abilities 
-            FROM heroes 
-            JOIN roles ON heroes.role_id = roles.id 
-            INNER JOIN heroes_affiliations ON heroes.id = heroes_affiliations.hero_id 
-            INNER JOIN affiliations ON affiliations.id = heroes_affiliations.affiliation_id 
-            INNER JOIN heroes_weapons ON heroes.id = heroes_weapons.hero_id 
-            INNER JOIN weapons ON weapons.id = heroes_weapons.weapon_id 
-            INNER JOIN heroes_abilities ON heroes.id = heroes_abilities.hero_id 
-            INNER JOIN abilities ON abilities.id = heroes_abilities.ability_id
-            WHERE roles.role = '${role}'
-            GROUP BY heroes.id, heroes.hero_name, roles.role;`;
+            const query = `SELECT count(*), json_agg(jsonb_build_object('id', heroes.id, 'name', heroes.hero_name)) as results FROM heroes INNER JOIN roles ON heroes.role_id = roles.id WHERE roles.role = '${role}';`;
             const response = await db.any(query);
             return response;
         } catch (error) {
