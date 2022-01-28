@@ -5,7 +5,7 @@ const HeroesModel = require('../models/HeroesModel');
 
 router.get('/', async(req, res) => {
     const response = await HeroesModel.getAllHeroes();
-    res.json(response[0]).status(200);
+    res.send(response[0]).status(200);
 });
 
 router.get('/:hero_name', async(req, res) => {
