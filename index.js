@@ -18,7 +18,7 @@ const app = express();
 
 // const server = http.createServer(app);
 
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
 
 const rootController = require('./routes/index');
 const heroesController = require('./routes/heroes');
