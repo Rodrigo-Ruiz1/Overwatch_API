@@ -27,7 +27,7 @@ const abilitiesController = require('./routes/abilities');
 const affiliationsController = require('./routes/affiliations');
 const weaponsController = require('./routes/weapons');
 
-app.use('/api/v1', rootController);
+app.use('/', rootController);
 app.use('/api/v1/heroes', heroesController);
 app.use('/api/v1/roles', rolesController);
 app.use('/api/v1/abilities', abilitiesController);
