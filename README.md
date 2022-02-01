@@ -18,7 +18,9 @@
 ---
 
 <h3>Example API response</h3>
-`/api/v1/heroes/winston`
+
+`GET /api/v1/heroes/winston`
+
 ```yaml
 {
 "id": 6,
@@ -95,7 +97,7 @@
 <br>
 <li>/api/v1/heroes/id/{id} - Return data by specific hero id</li>
 <br>
-<li>/api/v1/heroes/role/{role} - Return all heroes by specific role </li>
+<li>/api/v1/heroes/role/{role} - Returns list of heroes by specific role </li>
 </ul>
 
 ---
