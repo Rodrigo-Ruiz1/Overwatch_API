@@ -4,7 +4,7 @@
 
 ---
 
-<h3> Base URL - <a href="api-ow.herokuapp.com">api-ow.herokuapp.com/</a></h3>
+<h3> Base URL - <a href="https://api-ow.herokuapp.com">api-ow.herokuapp.com/</a></h3>
 
 <h3>Possible endpoints</h3>
 <ul>
