@@ -8,7 +8,8 @@ CREATE TABLE heroes (
     id serial PRIMARY KEY,
     hero_name text,
     role_id int REFERENCES roles(id),
-    hero_bio text
+    hero_bio text,
+    hero_image text
 );
 
 CREATE TABLE affiliations (
