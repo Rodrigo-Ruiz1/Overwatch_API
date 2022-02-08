@@ -20,7 +20,7 @@ class HeroesModel {
 
     static async getHeroByHeroName(hero_name) {
         try {
-            const query = `SELECT heroes.id, heroes.hero_name, heroes.hero_bio, roles.role, 
+            const query = `SELECT heroes.id, heroes.hero_name, heroes.hero_bio, heroes.hero_image, roles.role, 
             json_agg(DISTINCT jsonb_build_object('affiliation', json_build_object('name', affiliations.affiliation, 'description', affiliations.affiliation_description))) as affiliations, 
             json_agg(DISTINCT jsonb_build_object('weapon', jsonb_build_object('name', weapons.weapon_name, 'description', weapons.weapon_description))) as weapons, 
             json_agg(DISTINCT jsonb_build_object('ability', jsonb_build_object('name', abilities.ability_name, 'type', abilities.ability_type, 'description', abilities.ability_description, 'cooldown', abilities.cooldown, 'duration', abilities.duration, 'effect', abilities.effect, 'damage', abilities.damage))) as abilities 
@@ -32,7 +32,7 @@ class HeroesModel {
             INNER JOIN weapons ON weapons.id = heroes_weapons.weapon_id 
             INNER JOIN heroes_abilities ON heroes.id = heroes_abilities.hero_id 
             INNER JOIN abilities ON abilities.id = heroes_abilities.ability_id  
-            WHERE heroes.hero_name = '${hero_name}' GROUP BY heroes.id, heroes.hero_name, roles.role;`;
+            WHERE heroes.hero_name = '${hero_name}' GROUP BY heroes.id, heroes.hero_name, heroes.hero_image, roles.role;`;
             const response = await db.any(query);
             return response;
         } catch (error) {
@@ -43,7 +43,7 @@ class HeroesModel {
 
     static async getHeroByHeroId(hero_id) {
         try {
-            const query = `SELECT heroes.id, heroes.hero_name, roles.role, 
+            const query = `SELECT heroes.id, heroes.hero_name, heroes.hero_bio, heroes.hero_image, roles.role, 
             json_agg(DISTINCT jsonb_build_object('affiliation', json_build_object('name', affiliations.affiliation, 'description', affiliations.affiliation_description))) as affiliations, 
             json_agg(DISTINCT jsonb_build_object('weapon', jsonb_build_object('name', weapons.weapon_name, 'description', weapons.weapon_description))) as weapons, 
             json_agg(DISTINCT jsonb_build_object('ability', jsonb_build_object('name', abilities.ability_name, 'type', abilities.ability_type, 'description', abilities.ability_description, 'cooldown', abilities.cooldown, 'duration', abilities.duration, 'effect', abilities.effect, 'damage', abilities.damage))) as abilities 
@@ -55,7 +55,7 @@ class HeroesModel {
             INNER JOIN weapons ON weapons.id = heroes_weapons.weapon_id 
             INNER JOIN heroes_abilities ON heroes.id = heroes_abilities.hero_id 
             INNER JOIN abilities ON abilities.id = heroes_abilities.ability_id  
-            WHERE heroes.id = ${hero_id} GROUP BY heroes.id, heroes.hero_name, roles.role;`;
+            WHERE heroes.id = ${hero_id} GROUP BY heroes.id, heroes.hero_name, heroes.hero_image, roles.role;`;
             const response = await db.any(query);
             return response;
         } catch (error) {
